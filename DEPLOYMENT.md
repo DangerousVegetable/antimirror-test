@@ -68,3 +68,15 @@ jobs:
 3. Under **Build and deployment** > **Source**, select **GitHub Actions**.
 
 Once you push your code, GitHub will automatically build and deploy your site!
+
+## 5. Telegram Preview Tracking (Optional)
+
+To log the IP addresses of Telegram datacenters that fetch previews, you need a hosting provider that supports **Serverless Functions** (like Vercel or Netlify).
+
+### Using Vercel (Recommended for Tracking)
+1. Import your GitHub repository to [Vercel](https://vercel.com).
+2. Vercel will automatically detect Vite and the `/api/track.js` function.
+3. Once deployed, sharing the site will trigger the function, and you can see the IPs in the **Vercel Logs dashboard**.
+
+### How it works
+The `og:image` in `index.html` is set to `/api/track`. When Telegram fetches the preview image, it hits our serverless function first, allowing us to capture the IP before redirecting it to the actual image.
