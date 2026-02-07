@@ -80,6 +80,7 @@ function App() {
                   <div key={index} className="log-item">
                     <div><strong>Time:</strong> {new Date(log.timestamp).toLocaleString()}</div>
                     <div><strong>User:</strong> {log.firstName} (@{log.username})</div>
+                    <div><strong>IP:</strong> {log.ip}</div>
                     <div><strong>Platform:</strong> {log.platform}</div>
                   </div>
                 ))

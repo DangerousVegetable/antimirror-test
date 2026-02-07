@@ -6,10 +6,20 @@
 const LOG_STORAGE_KEY = 'antimirror_visitor_logs';
 
 export const logVisitor = async (userData) => {
+  let ip = 'unknown';
+  try {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    ip = data.ip;
+  } catch (error) {
+    console.warn('Failed to fetch IP:', error);
+  }
+
   const timestamp = new Date().toISOString();
   const logEntry = {
     timestamp,
     ...userData,
+    ip,
     userAgent: navigator.userAgent,
   };
 
@@ -29,7 +39,7 @@ export const logVisitor = async (userData) => {
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(logEntry),
     // });
-    
+
     // For now, we simulate a successful cloud log
     console.info('Visitor data would be sent to the cloud here.');
   } catch (error) {
